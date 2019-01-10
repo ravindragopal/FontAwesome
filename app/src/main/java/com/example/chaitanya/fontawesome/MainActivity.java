@@ -17,12 +17,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Typeface fontAwesomeFont = Typeface.createFromAsset(getAssets(), "fontawesome.ttf");
+        Typeface fontAwesomeFont = Typeface.createFromAsset(getAssets(), "fa-regular-400.ttf");
 
         textView1 = findViewById(R.id.textView1);
         imageView = findViewById(R.id.imageView);
 
+
+        textView1.setText("\uf2b9");
         textView1.setTypeface(fontAwesomeFont);
+
 
         Drawable iconDrawable = new FontIconDrawable(this, "f580", fontAwesomeFont).sizeDp(50);
 

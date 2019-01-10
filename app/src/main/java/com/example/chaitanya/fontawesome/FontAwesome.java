@@ -28,7 +28,7 @@ public class FontAwesome extends AppCompatTextView {
 
     //Font name should not contain "/".
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "fontawesome.ttf");
+                "fa-regular-400.ttf");
         setTypeface(tf);
     }
 
