@@ -26,29 +26,32 @@ public class FontAwesome {
     private static HashMap<String, String> hashMap = new HashMap<>();
     private static Context mContext;
 
-    public static FontAwesome getInstance(Context context) {
-        mContext = context;
+    private FontAwesome() {
+        fontAwesomeCodeMappingWithName();
+    }
+
+    public static synchronized FontAwesome getInstance(Context context) {
+        mContext = context.getApplicationContext();
         if (mInstance == null) {
             mInstance = new FontAwesome();
-            fontAwesomeCodeMappingWithName();
         }
         return mInstance;
     }
 
-    public static void fontAwesomeCodeMappingWithName() {
+    private void fontAwesomeCodeMappingWithName() {
         try {
             JSONObject jsonObject = new JSONObject(loadJSONFromAsset());
             Iterator<String> iterator = jsonObject.keys();
             while (iterator.hasNext()) {
                 String key = iterator.next();
-                hashMap.put(key, jsonObject.getString(key));
+                hashMap.put(key.replace("_", "-"), jsonObject.getString(key));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static String loadJSONFromAsset() {
+    private String loadJSONFromAsset() {
         String json = null;
         try {
             InputStream is = mContext.getAssets().open("font_awesome_code.json");
@@ -64,10 +67,23 @@ public class FontAwesome {
         return json;
     }
 
-    public String getFontAwesomeCode(String key) {
-        return hashMap.get(key);
+
+    /**
+     * Getting code by class name
+     *
+     * @param className
+     * @return font awesome code
+     */
+    public String getFontAwesomeCode(String className) {
+        return hashMap.get(className);
     }
 
+    /**
+     * return depending on font-icon type typeface
+     *
+     * @param type
+     * @return typeface
+     */
     public Typeface getTypeface(String type) {
         if (type.equals("fab")) {
             typeface = Typeface.createFromAsset(mContext.getAssets(), "fa-brands.ttf");

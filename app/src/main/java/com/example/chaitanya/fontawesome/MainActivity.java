@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView1.setText(FontAwesome.getInstance(MainActivity.this).getFontAwesomeCode("fa_adn"));
+                textView1.setText(FontAwesome.getInstance(MainActivity.this).getFontAwesomeCode("fa-adn"));
                 textView1.setTypeface(FontAwesome.getInstance(MainActivity.this).getTypeface("fab"));
                 textView1.setTextColor(Color.parseColor("#333333"));
             }
